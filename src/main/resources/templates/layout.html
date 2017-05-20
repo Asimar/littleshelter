@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th=“http://www.thymeleaf.org”>
+
+<head th:fragment=“head”>
+    <meta charset="UTF-8"/>
+    <title>Welcome in littleshelter!</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"
+          th:href="@{webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"
+            th:href="@{webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+
+<header th:fragment="site-header">
+    <a class="btn btn-default" href="index.html" th:href="@{/}">Home</a>
+    <a class="btn btn-default" href="users/login.html" th:href="@{/user/login}">Login</a>
+    <a class="btn btn-default" href="users/register.html" th:href="@{/user/register}">Register</a>
+    <a class="btn btn-default" href="posts/index.html" th:href="@{/gooddatas}">All your Good Data</a>
+    <a class="btn btn-default" href="posts/create.html" th:href="@{/gooddata/create}">Add some good data</a>
+    <a class="btn btn-default" href="users/index.html" th:href="@{/users}">Users</a>
+</header>
+
+<footer th:fragment="site-footer">
+    &copy; Created by: Nowosad Karol
+</footer>
+
+</body>
+</html>

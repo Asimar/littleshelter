@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-<meta charset="UTF-8" />
-<title>Welcome in littleshelter!</title>
-<link rel="stylesheet" href="../css/style.css"/>
-<link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
-<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
-</head>
-
+<head th:replace="layout::head"/>
 <body>
-	<div class="container">
-		<br />
-		<div class="alert alert-success">
-			<strong>Success!</strong> It is working as we expected.
-		</div>
-		<div class="test">HABABABA!</div>
-		<h1>Shelter for evry good data!</h1>
-		<h2>Work in progress</h2>
-		Now is: <b th:text="${execInfo.now.time}"></b>
-	</div>
-</body>
 
+<div class="container">
+    <header th:replace="layout::site-header"></header>
+    <br/>
+    <div class="alert alert-success">Additional css test</div>
+    <div class="test">Custom css test</div>
+    <h1>Shelter for evry good data!</h1>
+    <h2>Work in progress</h2>
+    Now is: <b th:text="${execInfo.now.time}"></b>
+    <footer th:replace="layout::site-footer"/>
+</div>
+
+</body>
 </html>
