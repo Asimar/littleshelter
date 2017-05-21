@@ -1,4 +1,4 @@
-package pl.karol.configuration;
+package pl.karol.littleshelter.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

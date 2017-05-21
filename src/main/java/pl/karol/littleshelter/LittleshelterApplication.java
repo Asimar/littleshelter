@@ -1,4 +1,4 @@
-package pl.karol;
+package pl.karol.littleshelter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

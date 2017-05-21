@@ -5,3 +5,24 @@
 	font-family: fantasy;
 	color: white;
 }
+
+html, body {
+	height: 100%;
+	padding-bottom: 70px;
+}
+
+
+.footer {
+	background-color: #eeeeec;
+	color: white;
+	text-shadow: 3px 3px 5px black; 
+	text-align: right;
+	padding-top: 10px;
+	padding-right: 25px;
+}
+
+.header {
+	text-align: center;
+	padding-top: 25px;
+	padding-bottom: 25px;
+}
