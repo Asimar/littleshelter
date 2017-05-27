@@ -2,8 +2,11 @@ package pl.karol.littleshelter.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import pl.karol.littleshelter.entity.User;
 
+@Service
 public interface UserService {
 	
 	List<User> getUsers();

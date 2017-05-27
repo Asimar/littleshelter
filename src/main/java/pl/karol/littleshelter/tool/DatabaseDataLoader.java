@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import pl.karol.littleshelter.entity.GoodData;
+import pl.karol.littleshelter.entity.RestrictedData;
 import pl.karol.littleshelter.entity.User;
 import pl.karol.littleshelter.repository.UserRepository;
 
@@ -23,15 +23,10 @@ public class DatabaseDataLoader implements CommandLineRunner {
 		
 		userRepository.deleteAll();
 		
-		User user1 = new User("Joe Biden", "aaa", "bbb", "ccc");
-		user1.addSomeGoodData(new GoodData<Integer>(45, "bbb"));
-		User user2 = new User("Joe Biden", "aaa", "bbb", "ccc");
-		user1.addSomeGoodData(new GoodData<Integer>(45, "bbb"));
-		User user3 = new User("Joe Biden", "aaa", "bbb", "ccc");
-		user3.addSomeGoodData(new GoodData<Integer>(45, "bbb"));
-		this.userRepository.save(user1);
-        this.userRepository.save(user2);
-        this.userRepository.save(user3);
+		this.userRepository.save(new User("A", "A", "A", "A").addRestrictedData(new RestrictedData("a", "pass")));
+        this.userRepository.save(new User("b", "b", "b", "b").addRestrictedData(new RestrictedData("a", "pass")));
+        this.userRepository.save(new User("c", "c", "c", "c").addRestrictedData(new RestrictedData("a", "pass")));
+        
 	}
 
 }

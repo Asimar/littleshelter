@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 @Data
@@ -24,7 +25,7 @@ public class User {
 	private String password;
 	
 	@Setter(value = AccessLevel.NONE)
-	private Set<GoodData> goodData = new HashSet<>();
+	private Set<RestrictedData> restrictedData = new HashSet<>();
 	
 	public User() {
 		
@@ -37,9 +38,23 @@ public class User {
 		this.password = password;
 	}
 	
-	public User addSomeGoodData(GoodData goodData) {
-		this.goodData.add(goodData);
+	public User addRestrictedData(RestrictedData restrictedData) {
+		this.restrictedData.add(restrictedData);
 		return this;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User: {");
+		builder.append("\n name: ");
+		builder.append(this.name);
+		builder.append("\n lastname: ");
+		builder.append(this.lastname);
+		builder.append("\n email: ");
+		builder.append(this.email);
+		builder.append("\n}");
+		return builder.toString();
 	}
 
 }
