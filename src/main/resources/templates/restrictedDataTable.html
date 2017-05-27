@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::head" />
+<body>
+
+	<div class="container">
+		<header th:replace="layout::site-header"></header>
+
+		<table class="table table-striped">
+			<caption>All your restricted data</caption>
+			<thead>
+				<tr>
+					<th>Data</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="item:${restrictedData}">
+					<td class="col-md-6" th:text="${item.data}"/>
+					<td class="col-md-6" th:text="${item.description}"/>
+				</tr>
+			</tbody>
+		</table>
+
+		 <footer th:replace="layout::site-footer"></footer>
+	</div>
+
+</body>
+</html>

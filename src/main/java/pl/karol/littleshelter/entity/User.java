@@ -7,7 +7,6 @@ import org.springframework.data.annotation.Id;
 
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import lombok.Setter;
 
 @Data

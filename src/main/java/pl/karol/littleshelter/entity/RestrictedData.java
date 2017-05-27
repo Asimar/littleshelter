@@ -5,9 +5,11 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import pl.karol.littleshelter.tool.LoggingUtil;
 
 @Data
+@EqualsAndHashCode
 public class RestrictedData {
 	
 	@Id
