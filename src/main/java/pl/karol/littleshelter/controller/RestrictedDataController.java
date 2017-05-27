@@ -24,7 +24,7 @@ public class RestrictedDataController {
 	@RequestMapping(value = "/restrictedData")
 	public String restrictedDataTable(Model model) {
 		
-		model.addAttribute("restrictedData", restrictedDtaService.findRestrictedData(userService.findUserByEmail("a").get()));
+		model.addAttribute("restrictedData", userService.findUserByEmail("a").get().getRestrictedData());
 		return "restrictedDataTable";
 	}
 	

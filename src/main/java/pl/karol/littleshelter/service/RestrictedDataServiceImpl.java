@@ -21,11 +21,6 @@ public class RestrictedDataServiceImpl implements RestrictedDataService {
 	}
 
 	@Override
-	public Set<RestrictedData> findRestrictedData(User user) {
-		return user.getRestrictedData();
-	}
-
-	@Override
 	public Set<RestrictedData> addRestrictedData(User user, RestrictedData data) {
 		user.getRestrictedData().add(data);
 		return userRepository.save(user).getRestrictedData();

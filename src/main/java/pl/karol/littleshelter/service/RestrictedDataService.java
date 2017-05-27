@@ -7,8 +7,6 @@ import pl.karol.littleshelter.entity.User;
 
 public interface RestrictedDataService {
 	
-	Set<RestrictedData> findRestrictedData(User user);
-	
 	Set<RestrictedData> addRestrictedData(User user, RestrictedData data);
 	
 	Set<RestrictedData> updateRestrictedData(User user, RestrictedData data);
