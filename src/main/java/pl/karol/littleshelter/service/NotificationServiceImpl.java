@@ -2,6 +2,7 @@ package pl.karol.littleshelter.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +15,7 @@ import pl.karol.littleshelter.object.NotificationMessage;
 @Service
 public class NotificationServiceImpl implements NotificationService{
 
-    public static final String NOTIFY_MSG_SESSION_KEY = "siteNotificationMessages";
+    public static final String NOTIFICATION_MESSAGE_SESSION_KEY = "siteNotificationMessages";
 
     private HttpSession httpSession;
     
@@ -24,23 +25,21 @@ public class NotificationServiceImpl implements NotificationService{
 	}
 
     @Override
-    public void addInfoMessage(String msg) {
-        addNotificationMessage(NotificationMessageType.INFO, msg);
+    public void addInfoMessage(String message) {
+        addNotificationMessage(NotificationMessageType.INFO, message);
     }
 
     @Override
-    public void addErrorMessage(String msg) {
-        addNotificationMessage(NotificationMessageType.ERROR, msg);
+    public void addErrorMessage(String message) {
+        addNotificationMessage(NotificationMessageType.ERROR, message);
     }
 
-    private void addNotificationMessage(NotificationMessageType type, String msg) {
-        List<NotificationMessage> notifyMessages = (List<NotificationMessage>)
-        httpSession.getAttribute(NOTIFY_MSG_SESSION_KEY);
-        if (notifyMessages == null) {
-            notifyMessages = new ArrayList<NotificationMessage>();
-        }
-        notifyMessages.add(new NotificationMessage(type, msg));
-        httpSession.setAttribute(NOTIFY_MSG_SESSION_KEY, notifyMessages);
+    @SuppressWarnings("unchecked")
+    private void addNotificationMessage(NotificationMessageType type, String message) {
+        List<NotificationMessage> notificationMessages = ((List<NotificationMessage>) httpSession.getAttribute(NOTIFICATION_MESSAGE_SESSION_KEY));
+        notificationMessages = Optional.ofNullable(notificationMessages).orElse(new ArrayList<NotificationMessage>());
+        notificationMessages.add(new NotificationMessage(type, message));
+        httpSession.setAttribute(NOTIFICATION_MESSAGE_SESSION_KEY, notificationMessages);
     }
 
 
