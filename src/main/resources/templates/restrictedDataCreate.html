@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout::head" />
+<body>
+
+	<div class="container">
+	
+	<header th:replace="layout::header"></header>
+
+		<div class="form-group">
+			<form method="post" th:action="@{/createRestrictedData}" th:object="${restrictedData}">
+
+				<div>
+					<label for="data">Data:</label>
+				</div>
+				<input id="data" class="form-control" type="text" name="data"
+					th:field="*{data}" /> <span class="formError"
+					th:if="${#fields.hasErrors('data')}" th:errors="*{data}">Invalid
+					username </span>
+
+				<div>
+					<label for="description">Description:</label>
+				</div>
+				<input id="description" class="form-control" type="text"
+					th:field="*{description}" /> <span class="formError"
+					th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Invalid
+					description </span>
+
+				<div class="buttons">
+					<input class="btn btn-default" type="submit" value="Create restricted data" />
+				</div>
+			</form>
+		</div>
+
+		<footer th:replace="layout::site-footer"></footer>
+	</div>
+
+</body>
+</html>
