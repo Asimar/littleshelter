@@ -25,3 +25,10 @@ html, body {
 	padding-top: 25px;
 	padding-bottom: 25px;
 }
+
+ul#messages li {
+	display: block;
+	width: 80%;
+	margin: 15px auto;
+	padding: 15px;
+}

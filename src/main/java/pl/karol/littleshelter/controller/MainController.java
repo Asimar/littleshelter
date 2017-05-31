@@ -18,7 +18,8 @@ public class MainController {
 
 	@RequestMapping(value = "/")
 	public String index() {
-		notificationService.addInfoMessage("message test");
+		notificationService.addInfoMessage("info message test");
+		notificationService.addErrorMessage("error message test");
 		return "index";
 	}
 

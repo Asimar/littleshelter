@@ -33,14 +33,28 @@ public class NotificationServiceImpl implements NotificationService{
     public void addErrorMessage(String message) {
         addNotificationMessage(NotificationMessageType.ERROR, message);
     }
+    
+	@Override
+	public void clearMessages() {
+        List<NotificationMessage> notificationMessages = getNotificationMessagesList();
+        notificationMessages.clear();
+        httpSession.setAttribute(NOTIFICATION_MESSAGE_SESSION_KEY, notificationMessages);
+		
+	}
 
-    @SuppressWarnings("unchecked")
+   
     private void addNotificationMessage(NotificationMessageType type, String message) {
-        List<NotificationMessage> notificationMessages = ((List<NotificationMessage>) httpSession.getAttribute(NOTIFICATION_MESSAGE_SESSION_KEY));
-        notificationMessages = Optional.ofNullable(notificationMessages).orElse(new ArrayList<NotificationMessage>());
+        List<NotificationMessage> notificationMessages = getNotificationMessagesList();
         notificationMessages.add(new NotificationMessage(type, message));
         httpSession.setAttribute(NOTIFICATION_MESSAGE_SESSION_KEY, notificationMessages);
     }
+
+    @SuppressWarnings("unchecked")
+	private List<NotificationMessage> getNotificationMessagesList() {
+		List<NotificationMessage> notificationMessages = ((List<NotificationMessage>) httpSession.getAttribute(NOTIFICATION_MESSAGE_SESSION_KEY));
+        notificationMessages = Optional.ofNullable(notificationMessages).orElse(new ArrayList<NotificationMessage>());
+		return notificationMessages;
+	}
 
 
 }
