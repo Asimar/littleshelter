@@ -26,6 +26,10 @@ html, body {
 	padding-bottom: 25px;
 }
 
+.buttons {
+	padding: 25px;
+}
+
 ul#messages li {
 	display: block;
 	width: 80%;

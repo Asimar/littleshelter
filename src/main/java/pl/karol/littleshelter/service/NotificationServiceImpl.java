@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pl.karol.littleshelter.enumeration.NotificationMessageType;
 import pl.karol.littleshelter.object.NotificationMessage;
+import pl.karol.littleshelter.object.enumeration.NotificationMessageType;
 
 @Service
 public class NotificationServiceImpl implements NotificationService{

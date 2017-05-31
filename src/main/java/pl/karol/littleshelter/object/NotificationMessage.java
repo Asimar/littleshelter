@@ -1,7 +1,7 @@
 package pl.karol.littleshelter.object;
 
 import lombok.Data;
-import pl.karol.littleshelter.enumeration.NotificationMessageType;
+import pl.karol.littleshelter.object.enumeration.NotificationMessageType;
 
 @Data
 public class NotificationMessage {

@@ -7,7 +7,39 @@
 	<div class="container">
 		<header th:replace="layout::site-header"></header>
 
-		register will be here.
+		<div class="form-group">
+			<form method="post" th:action="@{/register}" th:object="${user}">
+
+				<div>
+					<label for="email">Email:</label>
+				</div>
+				<input id="email" class="form-control" type="text" name="email"
+					th:field="*{email}" />
+
+				<div>
+					<label for="name">Name:</label>
+				</div>
+				<input id="name" class="form-control" type="text"
+					th:field="*{name}" />
+
+				<div>
+					<label for="lastname">Lastname:</label>
+				</div>
+				<input id="lastname" class="form-control" type="text"
+					th:field="*{lastname}" />
+
+				<div>
+					<label for="password">Password:</label>
+				</div>
+				<input id="password" class="form-control" type="password"
+					th:field="*{password}" />
+
+
+				<div class="buttons">
+					<input class="btn btn-default" type="submit" value="Register" />
+				</div>
+			</form>
+		</div>
 
 		<footer th:replace="layout::site-footer"></footer>
 	</div>

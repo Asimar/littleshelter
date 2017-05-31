@@ -12,4 +12,5 @@ public class BaseController {
 	public BaseController(NotificationServiceImpl notificationService) {
 		this.notificationService = notificationService;
 	}
+	
 }

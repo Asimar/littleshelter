@@ -1,5 +1,7 @@
 package pl.karol.littleshelter.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import pl.karol.littleshelter.entity.User;
@@ -15,13 +17,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Override
 	public boolean authenticate(String email, String password) {
-		// TODO Auto-generated method stub
-		return false;
+		Optional<User> user = userService.findUserByEmail(email);
+		boolean authenticated;
+		if(user.isPresent()) {
+			authenticated = password.equals(user.get().getPassword());
+		} else {
+			authenticated = false;
+		}
+		return authenticated;
 	}
 
 	@Override
 	public boolean register(User user) {
-		// TODO Auto-generated method stub
+		userService.addUser(user);
 		return false;
 	}
 

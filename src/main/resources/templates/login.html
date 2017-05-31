@@ -5,9 +5,35 @@
 <body>
 
 	<div class="container">
-		<header th:replace="layout::site-header"></header>
+	
+	<header th:replace="layout::header"></header>
 
-		login will be here
+		<div class="form-group">
+			<form method="post" th:action="@{/login}" th:object="${loginObject}">
+
+				<div>
+					<label for="email">Email:</label>
+				</div>
+				<input id="email" class="form-control" type="text" name="email"
+					th:field="*{email}" /> <span class="formError"
+					th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Invalid
+					username </span>
+
+				<div>
+					<label for="password">Password:</label>
+				</div>
+				<input id="password" class="form-control" type="password"
+					th:field="*{password}" /> <span class="formError"
+					th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Invalid
+					password </span>
+
+				<div class="buttons">
+					<input class="btn btn-default" type="submit" value="Login" /> <a
+						class="btn btn-default" href="register.html"
+						th:href="@{/register}">Go to Register </a>
+				</div>
+			</form>
+		</div>
 
 		<footer th:replace="layout::site-footer"></footer>
 	</div>
