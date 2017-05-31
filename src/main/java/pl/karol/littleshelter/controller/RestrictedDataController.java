@@ -5,18 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pl.karol.littleshelter.service.NotificationServiceImpl;
 import pl.karol.littleshelter.service.RestrictedDataServiceImpl;
 import pl.karol.littleshelter.service.UserServiceImpl;
 
 @Controller
-public class RestrictedDataController {
+public class RestrictedDataController extends BaseController{
 
 	private UserServiceImpl userService;
 	
 	private RestrictedDataServiceImpl restrictedDtaService;
 	
 	@Autowired
-	public RestrictedDataController(UserServiceImpl userService, RestrictedDataServiceImpl restrictedDataService) {
+	public RestrictedDataController(UserServiceImpl userService, RestrictedDataServiceImpl restrictedDataService, NotificationServiceImpl notificationService) {
+		super(notificationService);
 		this.userService = userService;
 		this.restrictedDtaService = restrictedDataService;
 	}
