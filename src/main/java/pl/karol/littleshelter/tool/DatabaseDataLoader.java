@@ -1,9 +1,8 @@
 package pl.karol.littleshelter.tool;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import pl.karol.littleshelter.entity.RestrictedData;
@@ -15,10 +14,13 @@ public class DatabaseDataLoader implements CommandLineRunner {
 
 	private UserRepository userRepository;
 	
+	private BCryptPasswordEncoder passwordEncoder;
+	
 
 	@Autowired
-	public DatabaseDataLoader(UserRepository userRepository) {
+	public DatabaseDataLoader(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -26,17 +28,8 @@ public class DatabaseDataLoader implements CommandLineRunner {
 		
 		userRepository.deleteAll();
 		
-		this.userRepository.save(new User("a", "a", "a", "a").addRestrictedData(new RestrictedData("asdafdf", "password for system account")));
-        this.userRepository.save(new User("b", "b", "b", "b").addRestrictedData(new RestrictedData("a", "pass")));
-        this.userRepository.save(new User("c", "c", "c", "c").addRestrictedData(new RestrictedData("a", "pass")));
-        
-        Optional<User> user = this.userRepository.findByEmail("a");
-        user.ifPresent(u -> u.addRestrictedData(new RestrictedData("dsafdsafd", "password for facebook")));
-        user.ifPresent(u -> u.addRestrictedData(new RestrictedData("habababa", "password for email")));
-        user.ifPresent(u -> u.addRestrictedData(new RestrictedData("1234", "credit card pin")));
-        user.ifPresent(u -> u.addRestrictedData(new RestrictedData("111 222 333", "number to lover")));
-        
-        this.userRepository.save(user.get());
+		this.userRepository.save(new User("karol","nowosad", "nk", "781", this.passwordEncoder.encode("admin"), true).addRestrictedData(new RestrictedData("abc123", "ultra restricted data")));
+     
 	}
 
 }

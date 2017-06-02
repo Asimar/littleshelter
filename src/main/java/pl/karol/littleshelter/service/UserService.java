@@ -9,7 +9,7 @@ public interface UserService {
 	
 	List<User> getUsers();
 	
-	void addUser(User user);
+	Boolean register(User user);
 	
 	Optional<User> findUserById(String id);
 	

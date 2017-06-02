@@ -20,6 +20,10 @@
     <a class="btn btn-default" href="posts/create.html" th:href="@{/createRestrictedData}">Add some restricted data</a>
     <a class="btn btn-default" href="users/index.html" th:href="@{/users}">Users</a>
     
+    <form th:action="@{/logout}" method="post">
+        <input class="btn btn-default" type="submit" value="Logout"/>
+    </form>
+    
 	<ul id="messages"
 		th:with="notificationMessages=${session[T(pl.karol.littleshelter.service.NotificationServiceImpl).NOTIFICATION_MESSAGE_SESSION_KEY]}">
 		<li class="alert"
