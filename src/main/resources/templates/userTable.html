@@ -14,13 +14,15 @@
 					<th>Name</th>
 					<th>Lastname</th>
 					<th>Email</th>
+					<th>Phone number</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="item:${users}">
-					<td class="col-md-4" th:text="${item.name}"/>
-					<td class="col-md-4" th:text="${item.lastname}"/>
-					<td class="col-md-4" th:text="${item.email}"/>
+				<tr th:each="user:${users}">
+					<td class="col-md-3" th:text="${user.name}"/>
+					<td class="col-md-3" th:text="${user.lastname}"/>
+					<td class="col-md-3" th:text="${user.email}"/>
+					<td class="col-md-3" th:text="${user.phoneNumber}"/>
 				</tr>
 			</tbody>
 		</table>
