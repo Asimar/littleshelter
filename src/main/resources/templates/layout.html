@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th=“http://www.thymeleaf.org”>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment=“head”>
     <meta charset="UTF-8"/>
@@ -16,7 +17,9 @@
     <a class="btn btn-default" href="index.html" th:href="@{/}">Home</a>
     <a class="btn btn-default" href="users/login.html" th:href="@{/login}">Login</a>
     <a class="btn btn-default" href="users/register.html" th:href="@{/register}">Register</a>
+    <div sec:authorize="isAuthenticated()">
     <a class="btn btn-default" href="posts/index.html" th:href="@{/restrictedData}">All your restricted data</a>
+    </div>
     <a class="btn btn-default" href="posts/create.html" th:href="@{/createRestrictedData}">Add some restricted data</a>
     <a class="btn btn-default" href="users/index.html" th:href="@{/users}">Users</a>
     

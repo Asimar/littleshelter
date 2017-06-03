@@ -3,6 +3,7 @@ package pl.karol.littleshelter.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,7 @@ public class RestrictedDataController extends BaseController{
 		this.restrictedDtaService = restrictedDataService;
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/restrictedData", method = RequestMethod.GET)
 	public String restrictedDataTable(Model model) {
 		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -39,13 +41,15 @@ public class RestrictedDataController extends BaseController{
 		return "restrictedDataTable";
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/createRestrictedData", method = RequestMethod.GET)
-	public String restrictedDataCreate(RestrictedData restrictedData) {	
+	public String restrictedDataCreatePage(RestrictedData restrictedData) {	
 		return "restrictedDataCreate";
 	}
 	
+	@Secured("ROLE_USER")
 	@RequestMapping(value = "/createRestrictedData", method = RequestMethod.POST)
-	public String loginPage(@Valid RestrictedData restrictedData, BindingResult bindingResult) {
+	public String createRestrictedData(@Valid RestrictedData restrictedData, BindingResult bindingResult) {
 		log.info("Restricted data added by user: ${replaceByuserId}");
 		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		restrictedDtaService.addRestrictedData(userService.findUserByEmail(authUser.getEmail()).get(), restrictedData);

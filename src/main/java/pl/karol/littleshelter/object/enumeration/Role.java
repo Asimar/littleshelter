@@ -2,7 +2,7 @@ package pl.karol.littleshelter.object.enumeration;
 
 public enum Role {
 	
-	USER("USER"),ADMIN("ADMIN");
+	USER("ROLE_USER"),ADMIN("ROLE_ADMIN");
 	
 	public String value;
 	
