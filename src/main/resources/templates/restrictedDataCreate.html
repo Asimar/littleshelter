@@ -15,17 +15,13 @@
 					<label for="data">Data:</label>
 				</div>
 				<input id="data" class="form-control" type="text" name="data"
-					th:field="*{data}" /> <span class="formError"
-					th:if="${#fields.hasErrors('data')}" th:errors="*{data}">Invalid
-					username </span>
-
+					th:field="*{data}" />
+					
 				<div>
 					<label for="description">Description:</label>
 				</div>
 				<input id="description" class="form-control" type="text"
-					th:field="*{description}" /> <span class="formError"
-					th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Invalid
-					description </span>
+					th:field="*{description}" />
 
 				<div class="shelter-action-buttons">
 					<input class="btn btn-success" type="submit" value="Create restricted data" />

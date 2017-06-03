@@ -5,8 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -25,16 +26,19 @@ public class User implements UserDetails {
 	@Id
 	private String id;
 
+	@Size(min = 3, max = 25)
 	private String name;
 
+	@Size(min = 2, max = 50)
 	private String lastname;
 
-	@NotNull
+	@Size(min = 5, max = 50)
 	private String email;
 
+	@Size(min = 7, max = 14)
 	private String phoneNumber;
 
-	@NotNull
+	@Size(min = 8, max = 30)
 	private String password;
 
 	private Boolean active;
