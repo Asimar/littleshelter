@@ -48,7 +48,7 @@
     </div>
     
 	<ul id="messages"
-		th:with="notificationMessages=${session[T(pl.karol.littleshelter.service.NotificationServiceImpl).NOTIFICATION_MESSAGE_SESSION_KEY]}">
+		th:with="notificationMessages=${session[T(pl.karol.littleshelter.service.NotificationService).NOTIFICATION_MESSAGE_SESSION_KEY]}">
 		<li class="alert"
 			th:each="message:${notificationMessages}" 
 			th:text="${message.text}"

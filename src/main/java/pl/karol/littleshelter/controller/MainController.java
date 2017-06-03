@@ -5,14 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.karol.littleshelter.repository.UserRepository;
-import pl.karol.littleshelter.service.NotificationServiceImpl;
+import pl.karol.littleshelter.service.NotificationService;
+import pl.karol.littleshelter.service.ValidationService;
 
 @Controller
 public class MainController extends BaseController {
 
 	@Autowired
-	public MainController(UserRepository userRepository, NotificationServiceImpl notificationService) {
-		super(notificationService);
+	public MainController(UserRepository userRepository, NotificationService notificationService, ValidationService validationService) {
+		super(notificationService, validationService);
 	}
 
 	@RequestMapping(value = "/")

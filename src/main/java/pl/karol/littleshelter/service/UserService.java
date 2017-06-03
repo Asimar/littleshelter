@@ -3,18 +3,58 @@ package pl.karol.littleshelter.service;
 import java.util.List;
 import java.util.Optional;
 
-import pl.karol.littleshelter.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
-public interface UserService {
+import pl.karol.littleshelter.entity.User;
+import pl.karol.littleshelter.repository.UserRepository;
+
+@Service
+public class UserService implements UserDetailsService {
+
+	private UserRepository userRepository;
 	
-	List<User> getUsers();
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Autowired
+	public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+		this.userRepository = userRepository;
+	}
 	
-	Boolean register(User user);
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User identified by email: ".concat(email).concat(" not foud")));
+	}
+
+	public Boolean register(User user) {
+		if (!userRepository.findByEmail(user.getEmail()).isPresent()) {
+			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+			userRepository.save(user);
+			return true;
+		}
+		
+		return false;
+	}
 	
-	Optional<User> findUserById(String id);
+	public List<User> getUsers() {
+		return userRepository.findAll();
+	}
+
+	public Optional<User> findUserById(String id) {
+		return userRepository.findById(id);
+	}
 	
-	Optional<User> findUserByEmail(String email);
-	
-	void deleteUser(User user);
+	public Optional<User> findUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+
+	public void deleteUser(User user) {
+		userRepository.delete(user);
+	}
 
 }

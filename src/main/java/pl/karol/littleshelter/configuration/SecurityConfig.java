@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import pl.karol.littleshelter.service.UserServiceImpl;
+import pl.karol.littleshelter.service.UserService;
 
 @Configuration
 @EnableGlobalMethodSecurity(securedEnabled=true)
@@ -16,9 +16,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	private UserServiceImpl userService;
+	private UserService userService;
 	
-	public SecurityConfig(UserServiceImpl userService, BCryptPasswordEncoder passwordEncoder) {
+	public SecurityConfig(UserService userService, BCryptPasswordEncoder passwordEncoder) {
 		this.userService = userService;
 		this.passwordEncoder = passwordEncoder;
 	}

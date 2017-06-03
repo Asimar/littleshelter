@@ -2,32 +2,29 @@ package pl.karol.littleshelter.controller;
 
 import javax.validation.Valid;
 
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.util.HtmlUtils;
 
 import lombok.extern.log4j.Log4j;
 import pl.karol.littleshelter.entity.User;
-import pl.karol.littleshelter.service.NotificationServiceImpl;
-import pl.karol.littleshelter.service.UserServiceImpl;
+import pl.karol.littleshelter.service.NotificationService;
+import pl.karol.littleshelter.service.UserService;
+import pl.karol.littleshelter.service.ValidationService;
 
 @Log4j
 @Controller
 public class UserController extends BaseController {
 
-	private UserServiceImpl userService;
+	private UserService userService;
 
 	@Autowired
-	public UserController(UserServiceImpl userService, NotificationServiceImpl notificationService) {
-		super(notificationService);
+	public UserController(UserService userService, NotificationService notificationService, ValidationService validationService) {
+		super(notificationService, validationService);
 		this.userService = userService;
 	}
 
@@ -51,33 +48,17 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(String confirmPassword, @Valid User user, BindingResult bindingResult) {
 
-		if (validateRegister(user, confirmPassword, bindingResult)) {
+		if (validationService.validateRegister(user, confirmPassword, bindingResult)) {
 			return "register";
 		} else if (userService.register(user)) {
-			notificationService.addInfoMessage("Register successful");
+			notificationService.addInfoMessage("Register successful! You can now login.");
 		} else {
-			notificationService.addErrorMessage("You are already registered");
+			notificationService.addErrorMessage("You are already registered!");
 		}
 
 		return "register";
 	}
 
-	private boolean validateRegister(User user, String confirmPassword, BindingResult bindingResult) {
-		if (!user.getPassword().equals(confirmPassword)) {
-			notificationService.addErrorMessage("Passwords are different!");
-			String springhtmlutil = HtmlUtils.htmlEscape(confirmPassword);
-			String jsoup = Jsoup.clean(confirmPassword, Whitelist.basic());
-			log.warn(springhtmlutil);
-			log.warn(jsoup);
-			return true;
-			
-		}
-		if (bindingResult.hasErrors()) {
-			for (FieldError error : bindingResult.getFieldErrors())			
-				notificationService.addErrorMessage(error.getField().toUpperCase().concat(": ").concat(error.getDefaultMessage()));
-			return true;
-		}
-		return false;
-	}
+
 
 }

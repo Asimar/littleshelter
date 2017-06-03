@@ -7,15 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import pl.karol.littleshelter.service.NotificationServiceImpl;
+import pl.karol.littleshelter.service.NotificationService;
 
 @Component
 public class NotificationInterceptor extends HandlerInterceptorAdapter {
 	
-	NotificationServiceImpl notificationService;
+	NotificationService notificationService;
 	
 	@Autowired
-	public NotificationInterceptor(NotificationServiceImpl notificationService) {
+	public NotificationInterceptor(NotificationService notificationService) {
 		this.notificationService = notificationService;
 	}
 	

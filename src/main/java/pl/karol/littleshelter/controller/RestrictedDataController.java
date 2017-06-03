@@ -14,21 +14,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import lombok.extern.log4j.Log4j;
 import pl.karol.littleshelter.entity.RestrictedData;
 import pl.karol.littleshelter.entity.User;
-import pl.karol.littleshelter.service.NotificationServiceImpl;
-import pl.karol.littleshelter.service.RestrictedDataServiceImpl;
-import pl.karol.littleshelter.service.UserServiceImpl;
+import pl.karol.littleshelter.service.NotificationService;
+import pl.karol.littleshelter.service.RestrictedDataService;
+import pl.karol.littleshelter.service.UserService;
+import pl.karol.littleshelter.service.ValidationService;
 
 @Log4j
 @Controller
 public class RestrictedDataController extends BaseController{
 
-	private UserServiceImpl userService;
+	private UserService userService;
 	
-	private RestrictedDataServiceImpl restrictedDtaService;
+	private RestrictedDataService restrictedDtaService;
 	
 	@Autowired
-	public RestrictedDataController(UserServiceImpl userService, RestrictedDataServiceImpl restrictedDataService, NotificationServiceImpl notificationService) {
-		super(notificationService);
+	public RestrictedDataController(UserService userService, RestrictedDataService restrictedDataService, 
+									NotificationService notificationService, ValidationService validationService) {
+		super(notificationService, validationService);
 		this.userService = userService;
 		this.restrictedDtaService = restrictedDataService;
 	}
@@ -53,7 +55,7 @@ public class RestrictedDataController extends BaseController{
 		log.info("Restricted data added by user: ${replaceByuserId}");
 		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		restrictedDtaService.addRestrictedData(userService.findUserByEmail(authUser.getEmail()).get(), restrictedData);
-		notificationService.addInfoMessage("Restricted data created");
+		notificationService.addInfoMessage("Restricted data created.");
 		return "restrictedDataCreate";
 	}
 	
