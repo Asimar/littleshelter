@@ -7,7 +7,6 @@ import java.util.Set;
 
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -16,6 +15,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import pl.karol.littleshelter.annotation.Email;
+import pl.karol.littleshelter.annotation.Password;
+import pl.karol.littleshelter.annotation.PhoneNumber;
 import pl.karol.littleshelter.object.enumeration.Role;
 
 @Data
@@ -32,13 +34,14 @@ public class User implements UserDetails {
 	@Size(min = 2, max = 50)
 	private String lastname;
 
+	@Email
 	@Size(min = 5, max = 50)
 	private String email;
 
-	@Size(min = 7, max = 14)
+	@PhoneNumber
 	private String phoneNumber;
 
-	@Size(min = 8, max = 30)
+	@Password
 	private String password;
 
 	private Boolean active;

@@ -1,6 +1,7 @@
 package pl.karol.littleshelter.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,7 @@ public class NotificationService {
     private void addNotificationMessage(NotificationMessageType type, String message) {
         List<NotificationMessage> notificationMessages = getNotificationMessagesList();
         notificationMessages.add(new NotificationMessage(type, message));
+        notificationMessages.sort((m1, m2) -> m1.getText().compareTo(m2.getText()));
         httpSession.setAttribute(NOTIFICATION_MESSAGE_SESSION_KEY, notificationMessages);
     }
 
