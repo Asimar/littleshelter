@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="layout::head"/>
 <body>
@@ -7,9 +8,9 @@
 <div class="container">
     <header th:replace="layout::site-header"></header>
     <br/>
-    <div class="alert alert-success">Additional css test</div>
-    <div class="test">Custom css test</div>
-    <h1>Shelter for your restricted data!</h1>
+    <div sec:authorize="isAuthenticated()">
+    	Hello <span sec:authentication="name">Nobody</span> ! You are now logged in.
+    </div>
     <h2>Work in progress</h2>
     Now is: <b th:text="${execInfo.now.time}"></b>
     <footer th:replace="layout::site-footer"></footer>

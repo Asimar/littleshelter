@@ -1,14 +1,13 @@
-.test {
-	background-color: indigo;
-	border-radius: 20px;
-	text-align: center;
-	font-family: fantasy;
-	color: white;
-}
 
 html, body {
 	height: 100%;
 	padding-bottom: 70px;
+}
+
+.header {
+	text-align: center;
+	padding-top: 25px;
+	padding-bottom: 50px;
 }
 
 .footer {
@@ -20,14 +19,17 @@ html, body {
 	padding-right: 25px;
 }
 
-.header {
-	text-align: center;
-	padding-top: 25px;
+.shelter-menu-buttons {
 	padding-bottom: 25px;
 }
 
-.buttons {
-	padding: 25px;
+.shelter-action-buttons {
+	padding: 25px;	
+}
+
+.shelter-button {
+	width: 180px;
+	padding: 2px;
 }
 
 ul#messages li {

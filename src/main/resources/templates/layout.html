@@ -14,18 +14,38 @@
 <body>
 
 <header th:fragment="site-header" class="header">
-    <a class="btn btn-default" href="index.html" th:href="@{/}">Home</a>
-    <a class="btn btn-default" href="users/login.html" th:href="@{/login}">Login</a>
-    <a class="btn btn-default" href="users/register.html" th:href="@{/register}">Register</a>
-    <div sec:authorize="isAuthenticated()">
-    <a class="btn btn-default" href="posts/index.html" th:href="@{/restrictedData}">All your restricted data</a>
-    </div>
-    <a class="btn btn-default" href="posts/create.html" th:href="@{/createRestrictedData}">Add some restricted data</a>
-    <a class="btn btn-default" href="users/index.html" th:href="@{/users}">Users</a>
+	<div class="row shelter-menu-buttons">
+		<div class="col-md-2">
+    		<a class="btn btn-primary shelter-button" href="index.html" th:href="@{/}">Home</a>
+    	</div>
+    	
+    	<div class="col-md-2">
+    		<a class="btn btn-primary shelter-button" th:href="@{/register}">Register</a>
+    	</div>
+    	
+    	<div class="col-md-2" sec:authorize="isAuthenticated()">
+    		<a class="btn btn-info shelter-button" th:href="@{/restrictedData}">All your restricted data</a>
+    	</div>
+    	
+    	<div class="col-md-2" sec:authorize="isAuthenticated()">
+    		<a class="btn btn-info shelter-button" th:href="@{/createRestrictedData}">Add some restricted data</a>
+    	</div>
+    	
+    	<div class="col-md-2" sec:authorize="isAuthenticated()">
+    		<a class="btn btn-info shelter-button" th:href="@{/users}">Users</a>
+    	</div>
+    	
+    	<div class="col-md-2" sec:authorize="!isAuthenticated()">
+    		<a class="btn btn-success shelter-button" th:href="@{/login}">Login</a>
+    	</div>
     
-    <form th:action="@{/logout}" method="post">
-        <input class="btn btn-default" type="submit" value="Logout"/>
-    </form>
+    	<div class="col-md-2" sec:authorize="isAuthenticated()">
+    		<form th:action="@{/logout}" method="post">
+        		<input class="btn btn-warning shelter-button" type="submit" value="Logout"/>
+    		</form>
+    	</div>
+    	<div class="col-md-1"></div>
+    </div>
     
 	<ul id="messages"
 		th:with="notificationMessages=${session[T(pl.karol.littleshelter.service.NotificationServiceImpl).NOTIFICATION_MESSAGE_SESSION_KEY]}">
