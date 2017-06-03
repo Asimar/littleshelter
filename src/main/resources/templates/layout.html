@@ -23,15 +23,15 @@
     		<a class="btn btn-primary shelter-button" th:href="@{/register}">Register</a>
     	</div>
     	
-    	<div class="col-md-2" sec:authorize="isAuthenticated()">
+    	<div class="col-md-2" sec:authorize="hasRole('ROLE_USER')">
     		<a class="btn btn-info shelter-button" th:href="@{/restrictedData}">All your restricted data</a>
     	</div>
     	
-    	<div class="col-md-2" sec:authorize="isAuthenticated()">
+    	<div class="col-md-2" sec:authorize="hasRole('ROLE_USER')">
     		<a class="btn btn-info shelter-button" th:href="@{/createRestrictedData}">Add some restricted data</a>
     	</div>
     	
-    	<div class="col-md-2" sec:authorize="isAuthenticated()">
+    	<div class="col-md-2" sec:authorize="hasRole('ROLE_ADMIN')">
     		<a class="btn btn-info shelter-button" th:href="@{/users}">Users</a>
     	</div>
     	
