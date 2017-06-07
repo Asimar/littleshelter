@@ -48,6 +48,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String register(String confirmPassword, @Valid User user, BindingResult bindingResult) {
 
+		log.info(user.toString());
 		if (validationService.validateRegister(user, confirmPassword, bindingResult)) {
 			return "register";
 		} else if (userService.register(user)) {

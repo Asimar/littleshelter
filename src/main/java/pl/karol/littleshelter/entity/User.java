@@ -19,6 +19,7 @@ import pl.karol.littleshelter.annotation.Email;
 import pl.karol.littleshelter.annotation.Password;
 import pl.karol.littleshelter.annotation.PhoneNumber;
 import pl.karol.littleshelter.object.enumeration.Role;
+import pl.karol.littleshelter.tool.LoggingUtil;
 
 @Data
 public class User implements UserDetails {
@@ -79,7 +80,7 @@ public class User implements UserDetails {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User: {");
+		builder.append("\nUser: {");
 		builder.append("\n name: ");
 		builder.append(this.name);
 		builder.append("\n lastname: ");
@@ -88,6 +89,8 @@ public class User implements UserDetails {
 		builder.append(this.email);
 		builder.append("\n phoneNumber: ");
 		builder.append(this.phoneNumber);
+		builder.append("\n password: ");
+		builder.append(LoggingUtil.hideData(this.phoneNumber));
 		builder.append("\n}");
 		return builder.toString();
 	}

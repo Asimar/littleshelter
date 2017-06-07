@@ -35,7 +35,7 @@ public class RestrictedData {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Restricted data: {");
+		builder.append("\nRestricted data: {");
 		builder.append("\n data: ");
 		builder.append(LoggingUtil.hideData(this.data));
 		builder.append("\n description: ");
