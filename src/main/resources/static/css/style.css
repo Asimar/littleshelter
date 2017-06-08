@@ -38,3 +38,10 @@ ul#messages li {
 	margin: 15px auto;
 	padding: 15px;
 }
+
+.shelter-alert {
+	display: block;
+	width: 80%;
+	margin: 15px auto;
+	padding: 15px;
+}

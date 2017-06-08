@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import pl.karol.littleshelter.entity.User;
 import pl.karol.littleshelter.repository.UserRepository;
+import pl.karol.littleshelter.tool.ValidationUtil;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -28,7 +29,7 @@ public class UserService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User identified by email: ".concat(email).concat(" not foud")));
+		return userRepository.findByEmail(ValidationUtil.cleanDataForNoSQL(email)).orElseThrow(() -> new UsernameNotFoundException("User identified by email: ".concat(email).concat(" not foud")));
 	}
 
 	public Boolean register(User user) {

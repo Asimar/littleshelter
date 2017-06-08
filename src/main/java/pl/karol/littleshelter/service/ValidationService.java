@@ -14,6 +14,7 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 
 import lombok.extern.log4j.Log4j;
+import pl.karol.littleshelter.entity.RestrictedData;
 import pl.karol.littleshelter.entity.User;
 import pl.karol.littleshelter.tool.ValidationUtil;
 
@@ -30,7 +31,7 @@ public class ValidationService {
 	public Boolean validateRegister(User user, String confirmPassword, BindingResult bindingResult) {
 		Boolean validationResult = new Boolean(false);
 		if (this.containsDangerousStrings(user)) {
-			notificationService.addErrorMessage("Inserted data is potentialy dangerous! Please correct it.");
+			notificationService.addErrorMessage("INSERTED DATA IS POTENTIALY DANGEROUS! PLEASE CORRECT IT.");
 			validationResult = true;
 		}
 		if (!user.getPassword().equals(confirmPassword)) {
@@ -46,6 +47,11 @@ public class ValidationService {
 		}
 		
 		return validationResult;
+	}
+	
+	
+	public Boolean validateRestrictedData(RestrictedData restrictedData, BindingResult bindingResult) {
+	 return true;	
 	}
 
 	private Boolean containsDangerousStrings(Object candidate) {
