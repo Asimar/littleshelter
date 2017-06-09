@@ -78,24 +78,6 @@ public class User implements UserDetails {
 	}
 
 	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("\nUser: {");
-		builder.append("\n name: ");
-		builder.append(this.name);
-		builder.append("\n lastname: ");
-		builder.append(this.lastname);
-		builder.append("\n email: ");
-		builder.append(this.email);
-		builder.append("\n phoneNumber: ");
-		builder.append(this.phoneNumber);
-		builder.append("\n password: ");
-		builder.append(LoggingUtil.hideData(this.phoneNumber));
-		builder.append("\n}");
-		return builder.toString();
-	}
-
-	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.roles;
 	}
@@ -123,6 +105,24 @@ public class User implements UserDetails {
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return this.active;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("\nUser: {");
+		builder.append("\n name: ");
+		builder.append(this.name);
+		builder.append("\n lastname: ");
+		builder.append(this.lastname);
+		builder.append("\n email: ");
+		builder.append(this.email);
+		builder.append("\n phoneNumber: ");
+		builder.append(this.phoneNumber);
+		builder.append("\n password: ");
+		builder.append(LoggingUtil.hideData(this.phoneNumber));
+		builder.append("\n}");
+		return builder.toString();
 	}
 
 }

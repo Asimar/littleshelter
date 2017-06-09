@@ -21,20 +21,20 @@ import pl.karol.littleshelter.service.ValidationService;
 
 @Log4j
 @Controller
-public class RestrictedDataController extends BaseController{
+public class RestrictedDataController extends BaseController {
 
 	private UserService userService;
-	
+
 	private RestrictedDataService restrictedDtaService;
-	
+
 	@Autowired
-	public RestrictedDataController(UserService userService, RestrictedDataService restrictedDataService, 
-									NotificationService notificationService, ValidationService validationService) {
+	public RestrictedDataController(UserService userService, RestrictedDataService restrictedDataService,
+			NotificationService notificationService, ValidationService validationService) {
 		super(notificationService, validationService);
 		this.userService = userService;
 		this.restrictedDtaService = restrictedDataService;
 	}
-	
+
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "/restrictedData", method = RequestMethod.GET)
 	public String restrictedDataTable(Model model) {
@@ -42,21 +42,25 @@ public class RestrictedDataController extends BaseController{
 		model.addAttribute("restrictedData", userService.findUserByEmail(authUser.getEmail()).get().getRestrictedData());
 		return "restrictedDataTable";
 	}
-	
+
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "/createRestrictedData", method = RequestMethod.GET)
-	public String restrictedDataCreatePage(RestrictedData restrictedData) {	
+	public String restrictedDataCreatePage(RestrictedData restrictedData) {
 		return "restrictedDataCreate";
 	}
-	
+
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "/createRestrictedData", method = RequestMethod.POST)
 	public String createRestrictedData(@Valid RestrictedData restrictedData, BindingResult bindingResult) {
-		log.info("Restricted data added by user: ${replaceByuserId}");
+		log.info(restrictedData.toString());
 		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		log.info("Added by user: ".concat(authUser.getEmail()));
+		if (validationService.validateRestrictedData(restrictedData, bindingResult)) {
+			return "restrictedDataCreate";
+		}
 		restrictedDtaService.addRestrictedData(userService.findUserByEmail(authUser.getEmail()).get(), restrictedData);
 		notificationService.addInfoMessage("Restricted data created.");
 		return "restrictedDataCreate";
 	}
-	
+
 }

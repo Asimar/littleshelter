@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="layout::head"/>
+<head th:replace="layout::head" />
 <body>
 
-<div class="container">
-    <header th:replace="layout::site-header"></header>
-    <br/>
-    <div sec:authorize="isAuthenticated()">
-    	Hello <span sec:authentication="name">Nobody</span>! You are now logged in.
-    </div>
-    <h2>Work in progress</h2>
-    Now is: <b th:text="${execInfo.now.time}"></b>
-    <footer th:replace="layout::site-footer"></footer>
-</div>
+	<div class="container">
+		<header th:replace="layout::site-header"></header>
+
+		<div class="shelter-index"></div>
+		<footer th:replace="layout::site-footer"></footer>
+	</div>
 
 </body>
 </html>

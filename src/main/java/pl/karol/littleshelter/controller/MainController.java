@@ -18,7 +18,6 @@ public class MainController extends BaseController {
 
 	@RequestMapping(value = "/")
 	public String index() {
-		notificationService.addInfoMessage("Welcom in littleshelter! We'll hope you and your data feel safety here.");
 		return "index";
 	}
 

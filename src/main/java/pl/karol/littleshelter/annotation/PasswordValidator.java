@@ -16,7 +16,7 @@ public class PasswordValidator implements ConstraintValidator<Password, String> 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 			
-		Pattern pattern = Pattern.compile("(?=.+[a-z])(?=.+[A-Z])(?=.+[0-9])(?=.+[!@#$%^&*]).{8,50}");
+		Pattern pattern = Pattern.compile("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,50}");
 		Matcher matcher = pattern.matcher(value);
 		
 		return matcher.matches();

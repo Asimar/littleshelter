@@ -44,7 +44,11 @@
         		<input class="btn btn-warning shelter-button" type="submit" value="Logout"/>
     		</form>
     	</div>
-    	<div class="col-md-1"></div>
+    	
+    	<div class="col-md-2 shelter-auth-user-data" sec:authorize="isAuthenticated()">
+    		Hello <span sec:authentication="name">Nobody</span>!
+    	</div>
+    	
     </div>
     
 	<ul id="messages"

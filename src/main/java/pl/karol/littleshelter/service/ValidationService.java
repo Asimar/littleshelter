@@ -29,15 +29,26 @@ public class ValidationService {
 	}
 
 	public Boolean validateRegister(User user, String confirmPassword, BindingResult bindingResult) {
-		Boolean validationResult = new Boolean(false);
-		if (this.containsDangerousStrings(user)) {
-			notificationService.addErrorMessage("INSERTED DATA IS POTENTIALY DANGEROUS! PLEASE CORRECT IT.");
-			validationResult = true;
-		}
+		Boolean validationResult = this.baseValidation(user, bindingResult);
 		if (!user.getPassword().equals(confirmPassword)) {
 			notificationService.addErrorMessage("Passwords are different!");
 			validationResult = true;
-
+		}
+		
+		return validationResult;
+	}
+	
+	public Boolean validateRestrictedData(RestrictedData restrictedData, BindingResult bindingResult) {
+		Boolean validationResult = this.baseValidation(restrictedData, bindingResult);
+		
+		return validationResult;
+	}
+	
+	private Boolean baseValidation(Object objectToValidation, BindingResult bindingResult) {
+		Boolean validationResult = new Boolean(false);
+		if (this.containsDangerousStrings(objectToValidation)) {
+			notificationService.addErrorMessage("INSERTED DATA IS POTENTIALY DANGEROUS! please correct it.");
+			validationResult = true;
 		}
 		if (bindingResult.hasErrors()) {
 			for (FieldError error : bindingResult.getFieldErrors())
@@ -47,11 +58,6 @@ public class ValidationService {
 		}
 		
 		return validationResult;
-	}
-	
-	
-	public Boolean validateRestrictedData(RestrictedData restrictedData, BindingResult bindingResult) {
-	 return true;	
 	}
 
 	private Boolean containsDangerousStrings(Object candidate) {

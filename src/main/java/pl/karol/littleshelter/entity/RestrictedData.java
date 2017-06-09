@@ -2,6 +2,8 @@ package pl.karol.littleshelter.entity;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
 
 import lombok.Data;
@@ -15,13 +17,13 @@ public class RestrictedData {
 	@Id
 	private String id;
 	
+	@Size(min = 1, max = 250)
 	private String data;
 	
+	@Size(min = 1, max = 250)
 	private String description;
 	
 	private Date insertDate = new Date();
-	
-	private Date updateDate;
 	
 	public RestrictedData() {
 		
@@ -42,8 +44,6 @@ public class RestrictedData {
 		builder.append(this.description);
 		builder.append("\n insertDate: ");
 		builder.append(this.insertDate);
-		builder.append("\n updateDate: ");
-		builder.append(this.updateDate);
 		builder.append("\n}");
 		return builder.toString();
 		

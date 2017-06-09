@@ -11,9 +11,6 @@ html, body {
 }
 
 .footer {
-	background-color: #eeeeec;
-	color: white;
-	text-shadow: 3px 3px 5px black;
 	text-align: right;
 	padding-top: 10px;
 	padding-right: 25px;
@@ -45,3 +42,16 @@ ul#messages li {
 	margin: 15px auto;
 	padding: 15px;
 }
+
+.shelter-auth-user-data {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.shelter-index{
+	background-image: url('../img/shelter5.png');
+	height: 700px;
+	border-radius: 10px;
+}
+
+
