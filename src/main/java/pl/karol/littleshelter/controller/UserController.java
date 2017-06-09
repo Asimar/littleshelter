@@ -7,6 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -60,6 +61,12 @@ public class UserController extends BaseController {
 		return "register";
 	}
 
-
+	@Secured("ROLE_ADMIN")
+	@RequestMapping(value="/deleteUser/{id}", method = RequestMethod.DELETE)
+	public String delete(@PathVariable String id) {
+	    userService.deleteUser(id);
+	    notificationService.addInfoMessage("User deleted successfully.");
+	    return "redirect:/users";
+	}
 
 }

@@ -45,17 +45,17 @@ public class UserService implements UserDetailsService {
 	public List<User> getUsers() {
 		return userRepository.findAll();
 	}
-
-	public Optional<User> findUserById(String id) {
-		return userRepository.findById(id);
-	}
 	
 	public Optional<User> findUserByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
 
-	public void deleteUser(User user) {
-		userRepository.delete(user);
+	public void deleteUser(String id) {
+		this.findUserById(id).ifPresent(user -> userRepository.delete(user));
+	}
+	
+	private Optional<User> findUserById(String id) {
+		return userRepository.findById(id);
 	}
 
 }
