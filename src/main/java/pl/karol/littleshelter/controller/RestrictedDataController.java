@@ -39,7 +39,7 @@ public class RestrictedDataController extends BaseController {
 	@RequestMapping(value = "/restrictedData", method = RequestMethod.GET)
 	public String restrictedDataTable(Model model, RestrictedData dataToDelete) {
 		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("restrictedData", userService.findUserByEmail(authUser.getEmail()).get().getRestrictedData());
+		model.addAttribute("restrictedData", restrictedDataService.getRestrictedData(authUser));
 		model.addAttribute("dataToDelete", dataToDelete);
 		return "restrictedDataTable";
 	}
@@ -60,7 +60,7 @@ public class RestrictedDataController extends BaseController {
 			return "restrictedDataCreate";
 		}
 		restrictedDataService.addRestrictedData(userService.findUserByEmail(authUser.getEmail()).get(), restrictedData);
-		notificationService.addInfoMessage("Restricted data created.");
+		notificationService.addInfoMessage("Restricted data created and encrypted.");
 		return "restrictedDataCreate";
 	}
 	
@@ -69,7 +69,7 @@ public class RestrictedDataController extends BaseController {
 	public String delete(RestrictedData dataToDelete) {
 		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		restrictedDataService.removeRestrictedData(authUser, dataToDelete);
-	    notificationService.addInfoMessage("restricted data deleted successfully.");
+	    notificationService.addInfoMessage("Restricted data deleted successfully.");
 	    return "redirect:/restrictedData";
 	}
 
