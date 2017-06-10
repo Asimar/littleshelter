@@ -25,21 +25,22 @@ public class RestrictedDataController extends BaseController {
 
 	private UserService userService;
 
-	private RestrictedDataService restrictedDtaService;
+	private RestrictedDataService restrictedDataService;
 
 	@Autowired
 	public RestrictedDataController(UserService userService, RestrictedDataService restrictedDataService,
 			NotificationService notificationService, ValidationService validationService) {
 		super(notificationService, validationService);
 		this.userService = userService;
-		this.restrictedDtaService = restrictedDataService;
+		this.restrictedDataService = restrictedDataService;
 	}
 
 	@Secured("ROLE_USER")
 	@RequestMapping(value = "/restrictedData", method = RequestMethod.GET)
-	public String restrictedDataTable(Model model) {
+	public String restrictedDataTable(Model model, RestrictedData dataToDelete) {
 		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("restrictedData", userService.findUserByEmail(authUser.getEmail()).get().getRestrictedData());
+		model.addAttribute("dataToDelete", dataToDelete);
 		return "restrictedDataTable";
 	}
 
@@ -58,9 +59,18 @@ public class RestrictedDataController extends BaseController {
 		if (validationService.validateRestrictedData(restrictedData, bindingResult)) {
 			return "restrictedDataCreate";
 		}
-		restrictedDtaService.addRestrictedData(userService.findUserByEmail(authUser.getEmail()).get(), restrictedData);
+		restrictedDataService.addRestrictedData(userService.findUserByEmail(authUser.getEmail()).get(), restrictedData);
 		notificationService.addInfoMessage("Restricted data created.");
 		return "restrictedDataCreate";
+	}
+	
+	@Secured("ROLE_USER")
+	@RequestMapping(value="/deleteRestrictedData", method = RequestMethod.DELETE)
+	public String delete(RestrictedData dataToDelete) {
+		User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		restrictedDataService.removeRestrictedData(authUser, dataToDelete);
+	    notificationService.addInfoMessage("restricted data deleted successfully.");
+	    return "redirect:/restrictedData";
 	}
 
 }

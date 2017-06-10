@@ -13,17 +13,25 @@
 				<tr>
 					<th>Data</th>
 					<th>Description</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="item:${restrictedData}">
-					<td class="col-md-6" th:text="${item.data}"/>
-					<td class="col-md-6" th:text="${item.description}"/>
+					<td class="col-md-5" th:text="${item.data}" />
+					<td class="col-md-5" th:text="${item.description}" />
+					<td class="col-md-2">
+						<form th:action="@{/deleteRestrictedData}" th:method="delete" th:object="${dataToDelete}">
+							<input type="hidden" id="data" name="data" th:value="${item.data}"/>
+							<input type="hidden" id="description" name="description" th:value="${item.description}"/>
+							<button class="btn btn-danger" type="submit">Delete</button>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 
-		 <footer th:replace="layout::site-footer"></footer>
+		<footer th:replace="layout::site-footer"></footer>
 	</div>
 
 </body>

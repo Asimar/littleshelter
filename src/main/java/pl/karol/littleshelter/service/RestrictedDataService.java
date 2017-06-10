@@ -1,7 +1,6 @@
 package pl.karol.littleshelter.service;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,15 +26,10 @@ public class RestrictedDataService {
 	}
 
 	
-	public Set<RestrictedData> updateRestrictedData(User user, RestrictedData data) {
-		user.getRestrictedData().stream().map(item -> item.getId().equals(data.getId()) ? data : item).collect(Collectors.toSet());
-		return userRepository.save(user).getRestrictedData();
-	}
-
-	
-	public Set<RestrictedData> removeRestrictedData(User user, RestrictedData data) {
+	public void removeRestrictedData(User user, RestrictedData data) {
+		user = userRepository.findById(user.getId()).get();
 		user.getRestrictedData().removeIf(item -> item.equals(data));
-		return userRepository.save(user).getRestrictedData();
+		userRepository.save(user);
 	}
 
 }
