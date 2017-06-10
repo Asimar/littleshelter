@@ -1,5 +1,6 @@
 
 html, body {
+	background-image: url('../img/shelterbg5.jpg');
 	height: 100%;
 	padding-bottom: 70px;
 }
@@ -48,8 +49,7 @@ ul#messages li {
 	padding-top: 10px;
 }
 
-.shelter-index{
-	background-image: url('../img/shelter5.png');
+.shelter-index {
 	height: 700px;
 	border-radius: 10px;
 }
