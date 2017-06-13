@@ -17,6 +17,14 @@ html, body {
 	padding-right: 25px;
 }
 
+.shelter-index {
+	font-family: CenturyGothic;
+	font-size: 32px;
+	color: #e4e3e2;
+	text-align: center;
+    letter-spacing: .15em;
+}
+
 .shelter-menu-buttons {
 	padding-bottom: 25px;
 }

@@ -120,7 +120,7 @@ public class User implements UserDetails {
 		builder.append("\n phoneNumber: ");
 		builder.append(this.phoneNumber);
 		builder.append("\n password: ");
-		builder.append(LoggingUtil.hideData(this.phoneNumber));
+		builder.append(LoggingUtil.hideData(this.password));
 		builder.append("\n}");
 		return builder.toString();
 	}
