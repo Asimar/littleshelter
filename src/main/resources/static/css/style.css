@@ -17,12 +17,22 @@ html, body {
 	padding-right: 25px;
 }
 
+@font-face {
+  font-family: CollFonts;
+  src: url(coolfonts2.ttf);
+}
+
 .shelter-index {
-	font-family: CenturyGothic;
-	font-size: 32px;
+	font-family: CollFonts;
+	padding-top: 25px;
+	font-size: 92px;
 	color: #e4e3e2;
 	text-align: center;
-    letter-spacing: .15em;
+    letter-spacing: .25em;
+    text-shadow: 
+      1px -1px 0 #767676, 
+      -1px 2px 1px #737272, 
+      -2px 4px 1px #767474;
 }
 
 .shelter-menu-buttons {
